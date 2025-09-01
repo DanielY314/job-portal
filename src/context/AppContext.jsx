@@ -1,18 +1,25 @@
-import { createContext } from "react"
+import { createContext, useState } from "react"
 
 export const AppContext = createContext()
 
-const AppContextProvider = ({ children }) => {
+export const AppContextProvider = (props) => {
 
-  const value ={
-    
-  }
+    const [searchFilter, setSearchFilter] = useState({
+      title:'',
+      location:''
+    })
 
-  return (
-    <AppContext.Provider value={value}>
-      {children}
-    </AppContext.Provider>
-  )
+    const [isSearched, setIsSearched] = useState(false)
+
+    const value ={
+      setSearchFilter, searchFilter,
+      isSearched, setIsSearched
+    }
+
+    return (
+      <AppContext.Provider value={value}>
+        {props.children}
+      </AppContext.Provider>
+    )
 }
 
-export default AppContextProvider
